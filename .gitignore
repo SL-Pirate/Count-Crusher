@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# temporary files for testing
+test_input.txt
