@@ -5,7 +5,6 @@ module lk.ac.iit.countcrusher {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
-    requires eu.hansolo.tilesfx;
 
     opens lk.ac.iit.countcrusher to javafx.fxml;
     exports lk.ac.iit.countcrusher;
