@@ -52,7 +52,7 @@ public class Stat {
         for (int i = 0; i < items.length; i++){
             int count = 0;
             for (int j = 0; j < items.length; j++){
-                if (i == j){
+                if (items[i].getCount() == items[j].getCount()){
                     count++;
                 }
             }
@@ -63,7 +63,7 @@ public class Stat {
         for (int i = 0; i < items.length; i++){
             int count = 0;
             for (int j = 0; j < items.length; j++){
-                if (i == j){
+                if (items[i].getCount() == items[j].getCount()){
                     count++;
                 }
             }
@@ -71,10 +71,15 @@ public class Stat {
                 mode.add(items[i].getCount());
             }
         }
+        //removing duplicates
+        Set<Integer> tmp = new LinkedHashSet<>(mode);
+        mode.clear();
+        mode.addAll(tmp);
+
         return mode;
     }
 
-    public int range(){
+    public int getRange(){
         return items[items.length - 1].getCount() - items[0].getCount();
     }
 }

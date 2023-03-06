@@ -39,3 +39,4 @@ build/
 
 # temporary files for testing
 test_input.txt
+/SaveFiles/

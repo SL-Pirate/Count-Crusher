@@ -16,7 +16,7 @@ public class Item {
 
     static {
         lastInputs = new int[10];
-        Arrays.fill(lastInputs, -1);
+        cleanLastInput();
     }
 
     public Item(String name, int ID){
@@ -57,6 +57,10 @@ public class Item {
     // Returns -1 if the list is empty
     static int getLastInput(){
         return lastInputs[lastInputs.length - 1];
+    }
+
+    static void cleanLastInput(){
+        Arrays.fill(lastInputs, -1);
     }
 
     void updateBtnName(){
