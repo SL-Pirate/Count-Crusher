@@ -22,6 +22,9 @@ public class Item {
     public void decrease(){
         count--;
     }
+    public int getCount(){
+        return count;
+    }
 
     void setupButton(){
         btn = new Button(name + "\n" + count);
