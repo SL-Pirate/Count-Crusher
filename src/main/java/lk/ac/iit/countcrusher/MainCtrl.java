@@ -17,6 +17,8 @@ public class MainCtrl{
     private TextArea inputField;
     private final int numOfLines = 6;
 
+    private Item[] items;
+
     private Item[] getItems () {
         String unformattedTxt = inputField.getText();
         String[] names = unformattedTxt.split("\\r?\\n");
@@ -27,7 +29,7 @@ public class MainCtrl{
             if (!name.isEmpty())
                 numOfValidItems++;
         }
-        Item[] items = new Item[numOfValidItems];
+        items = new Item[numOfValidItems];
 
         // Filtering through empty items
         int nameCount = 0;
@@ -78,7 +80,13 @@ public class MainCtrl{
             finishBtn.setTextAlignment(TextAlignment.CENTER);
             finishBtn.setAlignment(Pos.CENTER);
             finishBtn.setOnAction(event -> showStatScene());
-            root.add(finishBtn, getCords(items.length)[0] / 2, numOfLines + 1);
+            root.add(finishBtn, getCords(items.length)[0] / 2 + 1, numOfLines + 1);
+
+            Button undoBtn = new Button("Undo");
+            undoBtn.setTextAlignment(TextAlignment.CENTER);
+            undoBtn.setAlignment(Pos.CENTER);
+            undoBtn.setOnAction(event -> undo());
+            root.add(undoBtn, getCords(items.length)[0] / 2, numOfLines + 1);
 
             stage.setScene(scene);
             stage.show();
@@ -86,7 +94,12 @@ public class MainCtrl{
     }
 
     private void undo(){
-        // TODO
+        for (Item i : items){
+            if (i.ID == Item.getLastInput()){
+                i.decrease();
+                break;
+            }
+        }
     }
 
     @FXML
