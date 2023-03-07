@@ -9,20 +9,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import lk.ac.iit.countcrusher.Errors.DuplicateFoundError;
+import lk.ac.iit.countcrusher.Errors.InvalidInputError;
+import org.controlsfx.control.Notifications;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -63,7 +63,7 @@ public class MainCtrl{
     private final DecimalFormat df = new DecimalFormat("0.###");
 
     // Extracting items from the user input
-    private Item[] getItems () {
+    private Item[] getItems () throws InvalidInputError, DuplicateFoundError {
         String unformattedTxt = inputField.getText();
         String[] names = unformattedTxt.split("\\r?\\n");
 
@@ -95,6 +95,19 @@ public class MainCtrl{
             items[i] = new Item(namesList.get(i), i);
         }
 
+        // verifying the user input
+        // Checking if valid user input is present
+        if (items.length == 0){
+            throw new InvalidInputError();
+        }
+        //checking for duplicate inputs
+        for (int i = 0; i < items.length - 1; i++){
+            for (int j = i + 1; j < items.length; j++){
+                if (items[i].name.equals(items[j].name)){
+                    throw new DuplicateFoundError();
+                }
+            }
+        }
         return items;
     }
 
@@ -110,12 +123,10 @@ public class MainCtrl{
     // Switching to the button scene
     @FXML
     private void showButtonScene(ActionEvent evt) {
-        GridPane root;
-        Scene scene;
-        items = getItems();
-        if (items.length == 0) {
-            // TODO
-        } else {
+        try {
+            GridPane root;
+            Scene scene;
+            items = getItems();
             root = new GridPane();
             root.setPadding(new Insets(20, 20, 20, 20));
             root.setVgap(10);
@@ -159,6 +170,20 @@ public class MainCtrl{
             buttonStage.setScene(scene);
             buttonStage.show();
         }
+        catch (InvalidInputError e){
+            // If the user input is empty or has no valid inputs,
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(e.toString());
+            alert.setContentText("Item list can't be empty. \nPlease insert each item in the above box followed by the \"Enter\" key");
+            alert.showAndWait();
+        }
+        catch (DuplicateFoundError e){
+            // If the user input has duplicates,
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(e.toString());
+            alert.setContentText("Found duplicates in your input. Please revise");
+            alert.showAndWait();
+        }
     }
 
     // Going back to the home page from the buttons page
@@ -195,10 +220,8 @@ public class MainCtrl{
             StringBuilder itemOutput = new StringBuilder();
             itemOutput.append(item.name);
             int spaceLen = maxLen - item.name.length();
-            for (int i = 0; i <= spaceLen; i++){
-                itemOutput.append(" ");
-            }
-            itemOutput.append(" : " + item.getCount());
+            itemOutput.append(" ".repeat(Math.max(0, spaceLen + 1)));
+            itemOutput.append(" : ").append(item.getCount());
             listviewContent.add(itemOutput.toString());
         }
         outView.setItems(listviewContent);
@@ -218,10 +241,10 @@ public class MainCtrl{
         else {
             for (int i = 0; i < modeVals.size(); i++) {
                 if (i == modeVals.size() - 1) {
-                    modeStr.append(Integer.toString(modeVals.get(i)));
+                    modeStr.append(modeVals.get(i));
                 }
                 else{
-                    modeStr.append(Integer.toString(modeVals.get(i))).append(", ");
+                    modeStr.append(modeVals.get(i)).append(", ");
                 }
             }
         }
@@ -240,29 +263,47 @@ public class MainCtrl{
 
     @FXML
     private void saveToDisk(){
+        String filename = new SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Calendar.getInstance().getTime()) + ".txt";
+        File dir = new File("SaveFiles");
         try{
-            File dir = new File("SaveFiles");
+            // Creating a new folder called SaveFiles if not exists to save files
             if (!dir.exists()){
-                dir.mkdir();
+                if(!dir.mkdir()){
+                    System.out.println("Could not create folder save files??");
+                    throw new IOException();
+                }
             }
-            String filename = new SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Calendar.getInstance().getTime()) + ".txt";
-            FileWriter writer = new FileWriter(dir+ "/" + filename);
+
+            File checker = new File(dir + "/" + filename);
+            int checkCycle = 0;
+            while (checker.exists() && checkCycle <= 1){
+                filename = new SimpleDateFormat("yyyy.MM.dd_HH:mm:ss").format(Calendar.getInstance().getTime()) + ".txt";
+                checker = new File(dir + "/" + filename);
+                checkCycle++;
+            }
+            FileWriter writer = new FileWriter(dir + "/" + filename);
             for(Item item : items){
-                writer.append(item.name + " : " + item.getCount() + "\n");
+                writer.append(item.name).append(" : ").append(String.valueOf(item.getCount())).append("\n");
             }
-            writer.append("\ntotal: " + total.getText());
-            writer.append("\nmean: " + mean.getText());
-            writer.append("\nmedian: " + median.getText());
-            writer.append("\nmode: " + mode.getText());
-            writer.append("\nrange: " + range.getText());
+            writer.append("\ntotal: ").append(total.getText());
+            writer.append("\nminimum: ").append(min.getText());
+            writer.append("\nmaximum: ").append(max.getText());
+            writer.append("\nmean: ").append(mean.getText());
+            writer.append("\nmedian: ").append(median.getText());
+            writer.append("\nmode: ").append(mode.getText());
+            writer.append("\nrange: ").append(range.getText());
 
             writer.close();
 
-            // TODO
+            Notifications notification = Notifications.create().title("Save successful!").text("Data saved successfully into " + dir.getAbsolutePath() + "/" + filename);
+            notification.show();
         }
         catch (IOException e){
-            System.out.println(e);
-            // TODO
+            // File saving failed
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Save failed!");
+            alert.setContentText("Failed to save data into " + dir.getAbsolutePath() + "/" + filename);
+            alert.showAndWait();
         }
     }
     @FXML

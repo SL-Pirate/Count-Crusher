@@ -26,15 +26,15 @@
                               <Label layoutX="192.0" layoutY="14.0" text="Total" />
                               <Label layoutX="184.0" layoutY="129.0" text="Median" />
                               <Label layoutX="189.0" layoutY="158.0" text="Mode" />
-                              <Label fx:id="total" layoutX="373.0" layoutY="14.0" text="total" />
-                              <Label fx:id="mean" layoutX="369.0" layoutY="100.0" text="mean" />
-                              <Label fx:id="median" layoutX="363.0" layoutY="129.0" text="median" />
-                              <Label fx:id="mode" layoutX="369.0" layoutY="158.0" text="mode" />
-                              <Label fx:id="range" layoutX="368.0" layoutY="186.0" text="range" />
+                              <Label fx:id="total" layoutX="371.0" layoutY="14.0" text="total" />
+                              <Label fx:id="mean" layoutX="369.0" layoutY="129.0" text="mean" />
+                              <Label fx:id="median" layoutX="368.0" layoutY="158.0" text="median" />
+                              <Label fx:id="mode" layoutX="367.0" layoutY="186.0" text="mode" />
+                              <Label fx:id="range" layoutX="368.0" layoutY="100.0" text="range" />
                               <Label layoutX="177.0" layoutY="43.0" text="Minimum" />
                               <Label layoutX="176.0" layoutY="71.0" text="Maximum" />
-                              <Label fx:id="min" layoutX="357.0" layoutY="43.0" text="minimum" />
-                              <Label fx:id="max" layoutX="355.0" layoutY="71.0" text="maximum" />
+                              <Label fx:id="min" layoutX="369.0" layoutY="43.0" text="minimum" />
+                              <Label fx:id="max" layoutX="369.0" layoutY="71.0" text="maximum" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -42,7 +42,6 @@
                               <Button layoutX="106.0" layoutY="22.0" mnemonicParsing="false" onAction="#goBackToButtons" text="Back" />
                               <Button layoutX="253.0" layoutY="22.0" mnemonicParsing="false" onAction="#saveToDisk" text="Save to disk" />
                               <Button layoutX="446.0" layoutY="22.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
-                              <Label fx:id="statusLabel" layoutX="372.0" layoutY="26.0" text="Label" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>

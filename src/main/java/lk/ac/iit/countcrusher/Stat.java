@@ -61,28 +61,28 @@ public class Stat {
         List<Integer> mode = new ArrayList<>();
 
         // Finding the maximum occurrence of the items
-        for (int i = 0; i < items.length; i++){
+        for (Item item : items) {
             int count = 0;
-            for (int j = 0; j < items.length; j++){
-                if (items[i].getCount() == items[j].getCount()){
+            for (Item value : items) {
+                if (item.getCount() == value.getCount()) {
                     count++;
                 }
             }
-            if (count > maxOccurrence){
+            if (count > maxOccurrence) {
                 maxOccurrence = count;
             }
         }
 
         // getting items with the highest occurrence
-        for (int i = 0; i < items.length; i++){
+        for (Item item : items) {
             int count = 0;
-            for (int j = 0; j < items.length; j++){
-                if (items[i].getCount() == items[j].getCount()){
+            for (Item value : items) {
+                if (item.getCount() == value.getCount()) {
                     count++;
                 }
             }
-            if (count == maxOccurrence){
-                mode.add(items[i].getCount());
+            if (count == maxOccurrence) {
+                mode.add(item.getCount());
             }
         }
 
