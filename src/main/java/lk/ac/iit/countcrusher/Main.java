@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     public static final String name = "Count Crusher";
-    public static final double versionNum = 1.0;
+    public static final double versionNum = 1.1;
     public static final String version = "v" + versionNum;
     @Override
     public void start(Stage stage) throws IOException {

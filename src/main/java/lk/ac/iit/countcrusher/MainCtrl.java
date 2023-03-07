@@ -21,67 +21,84 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 public class MainCtrl{
+    // Scene 1 (main scene) fields
     @FXML
     private TextArea inputField;
+
+    // Scene 3 (the stat scene) fields
+    @FXML
+    private Label total;
     @FXML
     private Label mean;
-
     @FXML
     private Label median;
-
     @FXML
     private Label mode;
-
+    @FXML
+    private Label range;
+    @FXML
+    private Label min;
+    @FXML
+    private Label max;
     @FXML
     private ListView<?> outView;
 
-    @FXML
-    private Label range;
-
-    @FXML
-    private Label total;
+    // defines how many lines the 2nd scene (the button scene) can have
     private final int numOfLines = 6;
 
     private Item[] items;
 
+    // Stages for corresponding scenes
     private Stage mainStage;
     private Stage buttonStage;
     private Stage statStage;
+
+    // Floating point number conversions to String
     private final DecimalFormat df = new DecimalFormat("0.###");
 
+    // Extracting items from the user input
     private Item[] getItems () {
         String unformattedTxt = inputField.getText();
         String[] names = unformattedTxt.split("\\r?\\n");
-        int numOfValidItems = 0;
 
-        // Calculating the number of valid items
-        for (String name : names){
-            if (!name.isEmpty())
-                numOfValidItems++;
-        }
-        items = new Item[numOfValidItems];
-
-        // Filtering through empty items
-        int nameCount = 0;
-        for (int i = 0; i < items.length; i++){
-            while ((names[nameCount]).isEmpty()){
-                nameCount++;
+        // Validating user input
+        List<String> namesList = new ArrayList<>(List.of(names));
+        for (int  i = 0; i < namesList.size(); i++){
+            if (namesList.get(i).isEmpty()){
+                namesList.remove(i);
+                --i;
             }
-            items[i] = new Item(names[nameCount], i);
-            nameCount++;
+            else {
+                boolean valid = false;
+                for (int j = 0; j < namesList.get(i).length(); j++){
+                    if (namesList.get(i).charAt(j) != ' ' && namesList.get(i).charAt(j) != '\t'){
+                        valid = true;
+                        break;
+                    }
+                }
+                if (!valid){
+                    namesList.remove(i);
+                    --i;
+                }
+            }
+        }
+
+        Item[] items = new Item[namesList.size()];
+
+        for (int i = 0; i < namesList.size(); i++){
+            items[i] = new Item(namesList.get(i), i);
         }
 
         return items;
     }
 
-    public Item[] getItemsList(){
-        return items;
-    }
-
+    // Calculating coordinates for the buttons to be placed in the button scene
     private int[] getCords(int itemNum){
         int[] l = new int[2];
         l[0] = (itemNum / numOfLines);
@@ -89,11 +106,12 @@ public class MainCtrl{
 
         return l;
     }
+
+    // Switching to the button scene
     @FXML
     private void showButtonScene(ActionEvent evt) {
         GridPane root;
         Scene scene;
-        Item[] items;
         items = getItems();
         if (items.length == 0) {
             // TODO
@@ -143,6 +161,7 @@ public class MainCtrl{
         }
     }
 
+    // Going back to the home page from the buttons page
     @FXML
     private void goBackHome(){
         buttonStage.close();
@@ -150,14 +169,15 @@ public class MainCtrl{
         mainStage.show();
     }
 
+    // Go to instructions page
     @FXML
     private void showHelpScene(){
         // TODO
     }
 
+    // Switching to the Stat scene
     private void showStatScene() throws IOException {
         Scene scene;
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("stat_view.fxml"));
         fxmlLoader.setController(this);
         scene = new Scene(fxmlLoader.load());
@@ -185,6 +205,8 @@ public class MainCtrl{
 
         Stat stat = new Stat(items);
         total.setText(Integer.toString(stat.getTotal()));
+        min.setText(Integer.toString(stat.getMin()));
+        max.setText(Integer.toString(stat.getMax()));
         mean.setText(df.format(stat.getMean()));
         median.setText(df.format(stat.getMedian()));
 
@@ -209,6 +231,7 @@ public class MainCtrl{
         statStage.show();
     }
 
+    // Going back to the buttons scene from the stat scene
     @FXML
     private void goBackToButtons(){
         statStage.close();

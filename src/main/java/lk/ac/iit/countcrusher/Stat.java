@@ -6,6 +6,7 @@ public class Stat {
     private final Item[] items;
 
     Stat (Item[] items){
+        // sorting the items list corresponding to the count of each item
         for (int i = 1; i < items.length; i++){
             for (int j = 0; j < items.length - i; j++){
                 if (items[j].getCount() > items[j + 1].getCount()){
@@ -24,6 +25,16 @@ public class Stat {
             total += item.getCount();
         }
         return total;
+    }
+
+    public int getMax(){
+        // Since item list is sorted from minimum to maximum, getting the last item would give the maximum value
+        return items[items.length - 1].getCount();
+    }
+
+    public int getMin(){
+        // Since item list is sorted from minimum to maximum, getting the first item would give the maximum value
+        return items[0].getCount();
     }
 
     public double getMean(){
@@ -49,6 +60,7 @@ public class Stat {
         int maxOccurrence = 0;
         List<Integer> mode = new ArrayList<>();
 
+        // Finding the maximum occurrence of the items
         for (int i = 0; i < items.length; i++){
             int count = 0;
             for (int j = 0; j < items.length; j++){
@@ -60,6 +72,8 @@ public class Stat {
                 maxOccurrence = count;
             }
         }
+
+        // getting items with the highest occurrence
         for (int i = 0; i < items.length; i++){
             int count = 0;
             for (int j = 0; j < items.length; j++){
@@ -71,6 +85,7 @@ public class Stat {
                 mode.add(items[i].getCount());
             }
         }
+
         //removing duplicates
         Set<Integer> tmp = new LinkedHashSet<>(mode);
         mode.clear();

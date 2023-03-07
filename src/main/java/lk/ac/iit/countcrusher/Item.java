@@ -12,10 +12,16 @@ public class Item {
     public Button btn;
     private int count;
 
+    // List of items whose values were increased by user where the most recent button is at the end of the list
     private static final int[] lastInputs;
 
+    // Number of inputs that are kept track of user input
+    // This means a user can undo this many times
+    private static final int lenOfLastInputs = 10;
+
+    // Initializing the lastInputs list to -1 so when a value hits -1 means there are no valid records
     static {
-        lastInputs = new int[10];
+        lastInputs = new int[lenOfLastInputs];
         cleanLastInput();
     }
 
@@ -25,6 +31,7 @@ public class Item {
         setupButton();
     }
 
+    // increase the count of the item by 1 and add that particular item to the lastInputs list
     public void increase(){
         count++;
         updateBtnName();
@@ -33,6 +40,8 @@ public class Item {
         }
         lastInputs[lastInputs.length - 1] = this.ID;
     }
+
+    // decrease the count of the item by 1 and remove that item from the lastInputs list
     public void decrease(){
         count--;
         updateBtnName();
@@ -41,11 +50,13 @@ public class Item {
         }
         lastInputs[0] = -1;
     }
+
     public int getCount(){
         return count;
     }
 
-    void setupButton(){
+    // Creating and configuring the button created for each individual item to be placed in the buttons scene
+    private void setupButton(){
         btn = new Button(name + "\n" + count);
         btn.setTextAlignment(TextAlignment.CENTER);
         btn.setAlignment(Pos.CENTER);
@@ -59,10 +70,12 @@ public class Item {
         return lastInputs[lastInputs.length - 1];
     }
 
+    // Cleans or sets all values of the lastInputs list to -1 which makes then invalid
     static void cleanLastInput(){
         Arrays.fill(lastInputs, -1);
     }
 
+    // Updates the name of the corresponding button after the count of the item has been updated
     void updateBtnName(){
         btn.setText(name + "\n" + count);
     }
