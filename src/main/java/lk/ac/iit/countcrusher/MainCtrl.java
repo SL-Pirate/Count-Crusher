@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import lk.ac.iit.countcrusher.Errors.DuplicateFoundError;
 import lk.ac.iit.countcrusher.Errors.InvalidInputError;
 import org.controlsfx.control.Notifications;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -168,6 +167,7 @@ public class MainCtrl{
             root.add(backButton, getCords(items.length)[0] / 2 + 1, numOfLines + 1);
 
             buttonStage.setScene(scene);
+            buttonStage.setResizable(false);
             buttonStage.show();
         }
         catch (InvalidInputError e){
@@ -251,6 +251,7 @@ public class MainCtrl{
         mode.setText(modeStr.toString());
         range.setText(Integer.toString(stat.getRange()));
 
+        statStage.setResizable(false);
         statStage.show();
     }
 
