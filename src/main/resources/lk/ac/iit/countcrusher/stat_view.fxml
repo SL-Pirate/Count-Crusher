@@ -27,10 +27,10 @@
                               <Label layoutX="184.0" layoutY="129.0" text="Median" />
                               <Label layoutX="189.0" layoutY="158.0" text="Mode" />
                               <Label fx:id="total" layoutX="369.0" layoutY="14.0" text="tot" />
-                              <Label fx:id="mean" layoutX="368.0" layoutY="129.0" text="mea" />
-                              <Label fx:id="median" layoutX="368.0" layoutY="158.0" text="med" />
-                              <Label fx:id="mode" layoutX="368.0" layoutY="186.0" text="mod" />
-                              <Label fx:id="range" layoutX="369.0" layoutY="100.0" text="ran" />
+                              <Label fx:id="median" layoutX="368.0" layoutY="129.0" text="med" />
+                              <Label fx:id="mode" layoutX="368.0" layoutY="158.0" text="mod" />
+                              <Label fx:id="range" layoutX="368.0" layoutY="186.0" text="ran" />
+                              <Label fx:id="mean" layoutX="369.0" layoutY="100.0" text="mea" />
                               <Label layoutX="177.0" layoutY="43.0" text="Minimum" />
                               <Label layoutX="176.0" layoutY="71.0" text="Maximum" />
                               <Label fx:id="min" layoutX="369.0" layoutY="43.0" text="min" />

@@ -95,6 +95,11 @@ public class Stat {
     }
 
     public int getRange(){
-        return items[items.length - 1].getCount() - items[0].getCount();
+        if (items.length != 1) {
+            return items[items.length - 1].getCount() - items[0].getCount();
+        }
+        else{
+            return items[0].getCount();
+        }
     }
 }
