@@ -251,7 +251,6 @@ public class MainCtrl{
         mode.setText(modeStr.toString());
         range.setText(Integer.toString(stat.getRange()));
 
-        statStage.setResizable(false);
         statStage.show();
     }
 

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     public static final String name = "Count Crusher";
-    public static final double versionNum = 1.4;
+    public static final double versionNum = 1.5;
     public static final int minorVersionNum = 0;
     public static final String version = "v" + versionNum + "." + minorVersionNum;
     @Override
@@ -18,7 +18,6 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle(name + " " + version);
         stage.setScene(scene);
-        stage.setResizable(false);
         stage.show();
     }
 

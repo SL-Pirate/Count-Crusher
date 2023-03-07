@@ -21,27 +21,27 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Label layoutX="188.0" layoutY="186.0" text="Range" AnchorPane.bottomAnchor="13.802855463663008" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="186.0" />
-                              <Label layoutX="189.0" layoutY="100.0" text="Mean" />
-                              <Label layoutX="192.0" layoutY="14.0" text="Total" />
-                              <Label layoutX="184.0" layoutY="129.0" text="Median" />
-                              <Label layoutX="189.0" layoutY="158.0" text="Mode" />
-                              <Label fx:id="total" layoutX="369.0" layoutY="14.0" text="tot" />
-                              <Label fx:id="median" layoutX="368.0" layoutY="129.0" text="med" />
-                              <Label fx:id="mode" layoutX="368.0" layoutY="158.0" text="mod" />
-                              <Label fx:id="range" layoutX="368.0" layoutY="186.0" text="ran" />
-                              <Label fx:id="mean" layoutX="369.0" layoutY="100.0" text="mea" />
-                              <Label layoutX="177.0" layoutY="43.0" text="Minimum" />
-                              <Label layoutX="176.0" layoutY="71.0" text="Maximum" />
-                              <Label fx:id="min" layoutX="369.0" layoutY="43.0" text="min" />
-                              <Label fx:id="max" layoutX="369.0" layoutY="71.0" text="max" />
+                              <Label layoutX="188.0" layoutY="186.0" text="Range" textAlignment="RIGHT" wrapText="true" AnchorPane.leftAnchor="179.46968119725352" AnchorPane.rightAnchor="375.0" />
+                              <Label layoutX="189.0" layoutY="100.0" text="Mean" textAlignment="RIGHT" wrapText="true" AnchorPane.leftAnchor="185.46968119725352" AnchorPane.rightAnchor="375.0" />
+                              <Label layoutX="192.0" layoutY="14.0" text="Total" textAlignment="RIGHT" wrapText="true" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="375.0" />
+                              <Label layoutX="184.0" layoutY="129.0" text="Median" textAlignment="RIGHT" wrapText="true" AnchorPane.leftAnchor="173.46968119725352" AnchorPane.rightAnchor="375.0" />
+                              <Label layoutX="189.0" layoutY="158.0" text="Mode" textAlignment="RIGHT" wrapText="true" AnchorPane.leftAnchor="184.46968119725352" AnchorPane.rightAnchor="375.0" />
+                              <Label fx:id="total" layoutX="369.0" layoutY="14.0" text="tot" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="150.0" />
+                              <Label fx:id="median" layoutX="368.0" layoutY="129.0" text="med" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="150.0" />
+                              <Label fx:id="mode" layoutX="368.0" layoutY="158.0" text="mod" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="150.0" />
+                              <Label fx:id="range" layoutX="368.0" layoutY="186.0" text="ran" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="150.0" />
+                              <Label fx:id="mean" layoutX="365.0" layoutY="100.0" text="mea" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="150.0" />
+                              <Label layoutX="177.0" layoutY="43.0" text="Minimum" textAlignment="RIGHT" wrapText="true" AnchorPane.leftAnchor="161.46968119725352" AnchorPane.rightAnchor="375.0" />
+                              <Label layoutX="176.0" layoutY="71.0" text="Maximum" textAlignment="RIGHT" wrapText="true" AnchorPane.leftAnchor="158.46968119725352" AnchorPane.rightAnchor="375.0" />
+                              <Label fx:id="min" layoutX="366.0" layoutY="43.0" text="min" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="150.0" />
+                              <Label fx:id="max" layoutX="365.0" layoutY="71.0" text="max" textAlignment="RIGHT" wrapText="true" AnchorPane.rightAnchor="150.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Button layoutX="106.0" layoutY="22.0" mnemonicParsing="false" onAction="#goBackToButtons" text="Back" />
-                              <Button layoutX="253.0" layoutY="22.0" mnemonicParsing="false" onAction="#saveToDisk" text="Save to disk" />
-                              <Button layoutX="446.0" layoutY="22.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
+                              <Button layoutX="106.0" layoutY="22.0" mnemonicParsing="false" onAction="#goBackToButtons" text="Back" AnchorPane.leftAnchor="106.0" />
+                              <Button layoutX="253.0" layoutY="22.0" mnemonicParsing="false" onAction="#saveToDisk" text="Save to disk" AnchorPane.rightAnchor="252.5012243230674" />
+                              <Button layoutX="465.0" layoutY="22.0" mnemonicParsing="false" onAction="#exit" text="Exit" AnchorPane.rightAnchor="90.45193818898315" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>

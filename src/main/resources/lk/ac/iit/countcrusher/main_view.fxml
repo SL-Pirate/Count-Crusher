@@ -7,9 +7,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ac.iit.countcrusher.MainCtrl">
    <children>
-      <TextArea fx:id="inputField" layoutX="36.0" layoutY="79.0" prefHeight="244.0" prefWidth="528.0" />
-      <Label layoutX="36.0" layoutY="41.0" text="Add the items to be counted below" />
-      <Button layoutX="505.0" layoutY="37.0" mnemonicParsing="false" onAction="#showHelpScene" text="Help!" />
-      <Button layoutX="270.0" layoutY="344.0" mnemonicParsing="false" onAction="#showButtonScene" text="Continue" />
+      <TextArea fx:id="inputField" layoutX="36.0" layoutY="79.0" prefHeight="244.0" prefWidth="528.0" AnchorPane.bottomAnchor="76.24150205701281" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="35.52144729861129" AnchorPane.topAnchor="79.0" />
+      <Label layoutX="36.0" layoutY="41.0" text="Add the items to be counted below" AnchorPane.leftAnchor="36.0" />
+      <Button layoutX="505.0" layoutY="37.0" mnemonicParsing="false" onAction="#showHelpScene" text="Help!" AnchorPane.rightAnchor="45.04928613408425" />
+      <Button layoutX="270.0" layoutY="344.0" mnemonicParsing="false" onAction="#showButtonScene" text="Continue" AnchorPane.bottomAnchor="29.026614512405494" AnchorPane.rightAnchor="256.0729434784447" />
    </children>
 </AnchorPane>
