@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 public class MainCtrl{
     // Scene 1 (main scene) fields
@@ -60,6 +61,9 @@ public class MainCtrl{
 
     // Floating point number conversions to String
     private final DecimalFormat df = new DecimalFormat("0.###");
+
+    // To track if the user has saved data before existing
+    private boolean hasSaved = false;
 
     // Extracting items from the user input
     private Item[] getItems () throws InvalidInputError, DuplicateFoundError {
@@ -262,14 +266,14 @@ public class MainCtrl{
     }
 
     @FXML
-    private void saveToDisk(){
+    private boolean saveToDisk(){
         String filename = new SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Calendar.getInstance().getTime()) + ".txt";
         File dir = new File("SaveFiles");
         try{
             // Creating a new folder called SaveFiles if not exists to save files
             if (!dir.exists()){
                 if(!dir.mkdir()){
-                    System.out.println("Could not create folder save files??");
+                    System.out.println("Could not create folder save files");
                     throw new IOException();
                 }
             }
@@ -295,8 +299,12 @@ public class MainCtrl{
 
             writer.close();
 
+            hasSaved = true;
+
             Notifications notification = Notifications.create().title("Save successful!").text("Data saved successfully into " + dir.getAbsolutePath() + "/" + filename);
             notification.show();
+
+            return true;
         }
         catch (IOException e){
             // File saving failed
@@ -305,10 +313,35 @@ public class MainCtrl{
             alert.setContentText("Failed to save data into " + dir.getAbsolutePath() + "/" + filename);
             alert.showAndWait();
         }
+
+        return false;
     }
     @FXML
-    private void exit(){
-        System.exit(0);
+    private void exit(ActionEvent evt){
+        if (hasSaved) {
+            System.exit(0);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.CANCEL, ButtonType.APPLY, ButtonType.YES);
+            alert.setTitle("Confirm exit");
+            alert.setContentText("You have unsaved data. Are you sure you want to exit? ");
+
+            Button okBtn = ((Button) alert.getDialogPane().lookupButton(ButtonType.YES));
+            Button noBtn = ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL));
+            Button saveBtn = ((Button) alert.getDialogPane().lookupButton(ButtonType.APPLY));
+            okBtn.setStyle("fx-background-color: #F00");
+
+            okBtn.setText("Exit Anyway!");
+            saveBtn.setText("Save and exit");
+            okBtn.setOnAction(e -> {System.exit(0);});
+            saveBtn.setOnAction(e -> {
+                if (saveToDisk()){
+                    System.exit(0);
+                }
+            });
+
+            Optional<ButtonType> tf = alert.showAndWait();
+        }
     }
 
     private void undo(){
