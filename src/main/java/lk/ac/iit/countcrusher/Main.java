@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     public static final String name = "Count Crusher";
-    public static final double versionNum = 1.5;
+    public static final double versionNum = 1.6;
     public static final int minorVersionNum = 0;
     public static final String version = "v" + versionNum + "." + minorVersionNum;
     @Override
@@ -20,7 +20,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
 
     public static void main(String[] args) {
         launch();
