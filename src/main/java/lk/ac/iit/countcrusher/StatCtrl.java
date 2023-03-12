@@ -124,7 +124,7 @@ public class StatCtrl {
             writer.append("\nmean: ").append(mean.getText());
             writer.append("\nmedian: ").append(median.getText());
             writer.append("\nmode: ").append(mode.getText());
-            writer.append("\nrange: ").append(range.getText());
+            writer.append("\nrange: ").append(range.getText()).append("\n");
 
             writer.close();
 
