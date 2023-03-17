@@ -95,7 +95,7 @@ public class StatCtrl {
     }
     @FXML
     private boolean saveToDisk(){
-        String filename = new SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Calendar.getInstance().getTime()) + ".txt";
+        String filename = new SimpleDateFormat("yyyy.MM.dd_HH.mm").format(Calendar.getInstance().getTime()) + ".txt";
         File dir = new File("SaveFiles");
         try{
             // Creating a new folder called SaveFiles if not exists to save files
@@ -109,7 +109,7 @@ public class StatCtrl {
             File checker = new File(dir + "/" + filename);
             int checkCycle = 0;
             while (checker.exists() && checkCycle <= 1){
-                filename = new SimpleDateFormat("yyyy.MM.dd_HH:mm:ss").format(Calendar.getInstance().getTime()) + ".txt";
+                filename = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss").format(Calendar.getInstance().getTime()) + ".txt";
                 checker = new File(dir + "/" + filename);
                 checkCycle++;
             }
