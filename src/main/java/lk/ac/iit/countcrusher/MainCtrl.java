@@ -73,7 +73,7 @@ public class MainCtrl{
         //checking for duplicate inputs
         for (int i = 0; i < items.length - 1; i++){
             for (int j = i + 1; j < items.length; j++){
-                if (items[i].name.equals(items[j].name)){
+                if (items[i].name.equalsIgnoreCase(items[j].name)){
                     throw new DuplicateFoundError();
                 }
             }
